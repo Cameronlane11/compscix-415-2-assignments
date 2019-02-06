@@ -41,3 +41,26 @@ region_col <- WorldCities$region
 unique(region_col)
 ```
 
+
+```{r}
+country_col %>% unique()
+```
+
+```{r}
+WorldCities %>% ggplot(aes(x = population)) +
+geom_histogram()
+```
+
+```{r}
+WorldCities %>% ggplot(aes(x = population)) +
+geom_histogram() +
+xlab('City Population')
+```
+```{r}
+WorldCities %>% ggplot(aes(x = population)) +
+geom_histogram() +
+xlab('City Population') +
+  ylab('Numb of People') +
+  ggtitle('Camerons Sheet')
+```
+
