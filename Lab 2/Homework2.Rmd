@@ -1,0 +1,122 @@
+---
+title: "Homework 2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+?mpg
+```
+3.2.4 Question 1: without GEOM, nothing appears
+3.2.4 Question 2:  mpg contains 234 rows and 11 columns
+3.2.4 Question 3: drv means f = front-wheel drive, r = rear wheel drive, 4 = 4wd
+3.2.4 Question 4
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = hwy, y = cyl))
+```
+
+3.2.4 Question 5:
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = class, y = cyl))
+```
+not useful because theyre is no 1:1 correlation between type of car and cylendars (class may have multiple cylendars. They are not dependent on eachother)
+3.3.1 Question 1: instead of color = blue, you want the color = variable
+3.3.1 Question 2: categorical variables are: all except disp
+Question 3
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = year))
+```
+
+Question 4
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = year, size = year))
+```
+answer: you get multiple aestetics to the same variable
+Question5 
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy,stroke = hwy))
+```
+makes huge bubbles!
+
+Question 6: 
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy,color = hwy < 20
+                      ))
+```
+shows a true false for when values do and don't meet the criteria
+
+
+ 3.5.1 Question 4
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_wrap(~ class, nrow = 2)
+```
+ it adds multi dementions to review, it's nice ot have the information grouped and plotted by selected facet
+ 
+ Question 5
+```{r}
+?facet_wrap
+```
+ Nrow is the number of rows,ncolis the number of columsn. you can control them with this code p + facet_wrap(vars(class), nrow
+ 
+ 3.6.1
+ Question 1 What geom would you use to draw a line chart? A: geom_abline()
+ A boxplot?geom_boxplot()
+ A histogram? geom_histogram()
+ An area chart?geom_area() 
+ 
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) + 
+  geom_point() + 
+  geom_smooth(se = FALSE)
+```
+question 3. show legend false will not show legend, true will, makes sense to show it
+Question 4: SE is the Display confidence interval around smooth (true is default)
+Question 5: they will look the same because they have the same x and y and geoms
+Question 6
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth()
+```
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point() +
+geom_smooth()
+```
+
+3.7.1 Question 2
+geom_bar() makes the height of the bar proportional to the number of cases in each selection. geom_col() represents the values in the dataset
