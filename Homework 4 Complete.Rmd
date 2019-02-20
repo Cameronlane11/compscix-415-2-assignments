@@ -1,0 +1,28 @@
+---
+title: "Homework 3"
+output: html_document
+author: "Cameron Snyder"
+date: "2/14/2019"
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+library(nycflights13)
+```
+
+```{r}
+summarize(flights, delay = mean(dep_delay, na.rm = TRUE)
+```
+
+```{r}
+summarize(flights, delay = mean(dep_delay, na.rm = TRUE))
+```
+
+
+
+
+
+
