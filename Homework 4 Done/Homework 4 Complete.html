@@ -1,0 +1,143 @@
+---
+title: "Homework 4"
+author: "Cameron Snyder"
+date: "February 19, 2019"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+library(nycflights13)
+```
+
+5.6.7 Question 2
+```{r}
+not_cancelled <- flights %>% 
+  filter(!is.na(dep_delay), !is.na(arr_delay))
+
+```
+
+```{r}
+not_cancelled %>%
+  group_by(dest) %>%
+  summarise(n = n())
+```
+
+5.6.7 Question 4
+```{r}
+cancelled_delayed <-
+  flights %>%
+  mutate(cancelled = (is.na(arr_delay) | is.na(dep_delay))) %>%
+  group_by(year, month, day) %>%
+  summarise(
+    prop_cancelled = mean(cancelled),
+    avg_dep_delay = mean(dep_delay, na.rm = TRUE)
+  )
+```
+```{r}
+ggplot(cancelled_delayed, aes(x = avg_dep_delay, prop_cancelled)) +
+  geom_point() +
+  geom_smooth() + ylab('percent cancelled') + xlab('average length of delay')
+```
+Most delays are between 1 - 30 min
+
+Question 6
+sort() will sort the results of count() in descending order of #.
+
+10.5.1 Answer: You can tell if an object is a tibble by is_tibble which will return a true or false
+```{r}
+is_tibble(mtcars)
+```
+
+10.5.2 Here is a tibble
+```{r}
+as_tibble(flights)
+```
+```{r}
+df <- data.frame(abc = 1, xyz = "a")
+df$x
+```
+ #Partial matching is not allowed
+```{r}
+df[, "xyz"]
+```
+ # on a tibble this will be a data frame still
+```{r}
+df[, c("abc", "xyz")]
+```
+```{r}
+as_tibble(df)
+```
+Answer: df[, c("abc", "xyz")] is the closest view to a tibble
+
+10.5.3 Extract using as_tibble(var) ir df(var)
+
+
+
+10.5 Question 6
+```{r}
+package?tibble
+```
+The n_extra argument determines the number of extra columns to print information for
+
+12.3.3 Question 2
+```{r}
+table4a %>% 
+  gather(`1999`, `2000`, key = "year", value = "cases")
+#> Error in inds_combine(.vars, ind_list): Position must be between 0 and n
+```
+R needs a backtick ` for non-syntactic names, in this case a number
+
+
+Question 3
+```{r}
+people <- tribble(
+  ~name, ~key, ~value,
+  #-----------------|--------|------
+  "Phillip Woods",  "age", 45,
+  "Phillip Woods", "height", 186,
+  "Phillip Woods", "age", 50,
+  "Jessica Cordero", "age", 37,
+  "Jessica Cordero", "height", 156
+)
+glimpse(people)
+```
+Spreading fails because the the key and name columns are not unique rows. The failed Name Phillip Woods has both age and height We could only count distinct keys and rows
+```{r}
+people %>%
+  distinct(name, key, .keep_all = TRUE) %>%
+  spread(key, value)
+```
+Question 4
+```{r}
+preg <- tribble(
+  ~pregnant, ~male, ~female,
+  "yes", NA, 10,
+  "no", 20, 12
+)
+```
+```{r}
+tidy_preg <- preg %>%
+  gather(male, female, key = "sex", value = "count", na.rm = TRUE)
+```
+```{r}
+tidy_preg
+```
+12.4.3 Question 1
+```{r}
+tibble(x = c("a,b,c", "d,e,f,g", "h,i,j")) %>%
+  separate(x, c("one", "two", "three"))
+
+```
+```{r}
+tibble(x = c("a,b,c", "d,e", "f,g,i")) %>%
+  separate(x, c("one", "two", "three"), extra = "drop"")
+```
+The extra = drop argument tells separate to drop the extra values
+
+Question 2
+Remove = False takes away input columns in the result data frame. 
+
