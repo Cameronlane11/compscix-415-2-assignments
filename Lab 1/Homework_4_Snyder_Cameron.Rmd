@@ -1,0 +1,136 @@
+---
+title: "homework 4 due 2.26"
+author: "Cameron Snyder"
+date: "February 26, 2019"
+output: html_document
+---
+---
+title: "Homework 4"
+author: "Cameron Snyder"
+date: "February 26, 2019"
+output: html_document
+---
+```{r}
+library(tidyverse)
+```
+
+```{r}
+library(nycflights13)
+```
+
+
+3.8.1 Question 1
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
+  geom_point()
+```
+Some of the points are overlapping, you can use the geom_jitter function isntead of points
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
+  geom_jitter()
+```
+Question 2: Width and Height
+Question 3
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
+  geom_count()
+```
+Jitter keeps the dot sizes the same but count makes them size based on values
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy, color = class)) + 
+   geom_boxplot(position = "dodge")
+```
+Section 3.9.1
+Question 2
+```{r}
+?labs()
+```
+Description
+
+Good labels are critical for making your plots accessible to a wider audience. Always ensure the axis and legend labels display the full variable name. Use the plot title and subtitle to explain the main findings. It's common to use the caption to provide information about the data source. tag can be used for adding identification tags to differentiate between multiple plots.
+Quetsion 4
+```{r}
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_point() + 
+  geom_abline() +
+  coord_fixed()
+```
+Theres a positive correlation between mpg in city or highway
+
+
+Section 4.4 Question 1 
+
+my_variable needs to be my_variable
+Question 2
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
+filter(mpg, cyl == 8)
+filter(diamonds, carat > 3)
+```
+
+```{r}
+??nycflights13
+```
+
+Find all flights that
+
+Had an arrival delay of two or more hours
+```{r}
+filter(flights, arr_delay >= 120)
+```
+
+Flew to Houston (IAH or HOU)
+```{r}
+filter(flights, dest %in% c("IAH", "HOU"))
+```
+
+Were operated by United, American, or Delta
+```{r}
+filter(flights, carrier %in% c("AA", "DL", "UA"))
+```
+
+Departed in summer (July, August, and September)
+
+```{r}
+filter(flights, month %in% c("7", "8", "9"))
+```
+
+Arrived more than two hours late, but didn't leave late
+```{r}
+filter(flights, arr_delay >= 120, dep_delay <= 0)
+```
+
+Were delayed by at least an hour, but made up over 30 minutes in flight
+```{r}
+filter(flights, dep_delay >= 60, arr_delay >= 30)
+```
+
+Departed between midnight and 6am (inclusive)
+```{r}
+filter(flights, dep_time >= 2400, dep_time >= 600)
+```
+Question 2
+
+```{r}
+filter(flights, between(dep_time, 2400, 600))
+```
+
+Question 4:
+^ 0 is the same as 1
+NA | TRUE 
+Neither NA & NA can be tested and the results is NA & NA.
+
+5.4.1
+Question 1
+```{r}
+select(flights, dep_time, dep_delay, arr_time, arr_delay)
+```
+
+Question 3
+```{r}
+vars <- c("year", "month", "day", "dep_delay", "arr_delay")
+select(flights, one_of(vars))
+```
+select only works without "". you can print the name in one_of()
