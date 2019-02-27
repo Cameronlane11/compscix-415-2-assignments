@@ -1,0 +1,30 @@
+
+```{r}
+library(tidyverse)
+file_path <- 'C:/Users/cameron.snyder/Documents/Metrics/Reports/flights.csv'
+csv_data <- read_csv(file = file_path)
+
+```
+
+
+
+```{r}
+write_delim(csv_data, delim = '|', path = 'C:/Users/cameron.snyder/Documents/Metrics/Reports/flightswritten.csv')
+```
+
+```{r}
+data(iris)
+class(iris)
+```
+
+
+```{r}
+data(iris)
+iris <- as.data.frame(iris)
+iris
+```
+
+```{r}
+?hiv
+```
+
