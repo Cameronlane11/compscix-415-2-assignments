@@ -1,0 +1,110 @@
+---
+title: "Midterm"
+author: "Cameron Snyder"
+date: "March 3, 2019"
+output: html_document
+---
+
+
+# The tidyverse packages
+
+1. Can you name which package is associated with each task below?
+Plotting -  ggplot2
+Data munging/wrangling - dplyr
+Reshaping (speading and gathering) data - dplyr
+Importing/exporting data -  ??
+
+2 Now can you name two functions that you've used from each package that you listed above for these
+tasks?
+Plotting - ggplot()
+Data munging/wrangling -select()
+Reshaping data - cast()
+Importing/exporting data - ??
+
+# R Basics
+1. 
+```{r}
+My_data.name___is.too00ooLong <- c( 1 , 2 , 3 )
+```
+2
+```{r}
+my_string <- c('has', 'an', 'error', 'in', 'it')
+```
+3. The values inthe vector are a mix of integers and characters but display as string
+
+# Data import/export
+???????????/
+
+# Visualization
+1. There are no labels on what would be the y axis of age and gender. The sizes aren't clear if their reporesentative of the whole population or along the y axis
+2
+
+```{r}
+ggplot(diamonds, aes(cut, carat)) +
+  geom_boxplot(aes(fill = color)) +
+  coord_flip()
+```
+3?
+
+# Data munging and wrangling
+1.???
+2. 
+```{r}
+
+price_per_carat <- mutate(diamonds, price_per_carat = diamonds$price/diamonds$carat)
+
+glimpse(price_per_carat)
+
+```
+
+3.  How Many diamonds apply to filter:
+```{r}
+question_3 <- filter(diamonds, price > 10000 & carat < 1.5)
+count(question_3)
+```
+What proportion?
+```{r}
+834/ count(diamonds)
+```
+Do the results make sense? the proportion of 1.5% of diamonds are more than $10,000 and with a carat lower than 1.5 make sense. The lower the carat the higher the value, these would be rare and valuable
+
+We need to be wary of these numbers because the correlation isn't explained with a proportion of # of filter / # of total
+
+# EDA
+
+```{r}
+glimpse(txhousing)
+```
+1. the date range is between 2000-2015
+```{r}
+max(txhousing$year)
+```
+2. 90 unique cities
+```{r}
+unique(txhousing$city)
+```
+3. Houston, Texas in July 2015 had the highest number of sales
+```{r}
+filter(txhousing, sales >= 8945)
+```
+4. I predict it's a positive correlation between the number of listings and the number of sales
+```{r}
+ggplot(data = txhousing, aes(y = sales, x = listings)) + geom_point() + geom_smooth()
+```
+5 What proportion of sales is missing for each city?????????????
+
+
+
+6. 
+```{r}
+xx <- filter(txhousing, sales >= 500)
+ggplot(data = xx, aes(x = median, y = city)) + geom_point()
+```
+- The distributions of median sales by city are different
+- Corpus Christi likely needs more data
+- The distribution of median sales over 500 will have a big spread and lots of data points
+
+# Git and Git Hub
+1. https://github.com/Cameronlane11/compscix-415-2-assignments
+
+
