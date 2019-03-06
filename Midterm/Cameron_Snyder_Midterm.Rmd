@@ -5,9 +5,11 @@ date: "March 3, 2019"
 output: html_document
 ---
 
+```{r}
+library(tidyverse)
+```
 
 # The tidyverse packages
-
 1. Can you name which package is associated with each task below?
 Plotting -  ggplot2
 Data munging/wrangling - dplyr
@@ -19,7 +21,7 @@ tasks?
 Plotting - ggplot()
 Data munging/wrangling -select()
 Reshaping data - cast()
-Importing/exporting data - ??
+Importing/exporting data - read.csv()
 
 # R Basics
 1. 
@@ -33,7 +35,24 @@ my_string <- c('has', 'an', 'error', 'in', 'it')
 3. The values inthe vector are a mix of integers and characters but display as string
 
 # Data import/export
-???????????/
+1.
+```{r}
+data_import_txt <- read.delim("C:/Users/cameron.snyder/Documents/Metrics/Reports/rail_trail.txt")
+```
+
+```{r}
+glimpse(data_import_txt)
+```
+
+
+2.
+```{r}
+data_import <- read.csv("C:/Users/cameron.snyder/Documents/Metrics/Reports/rail_trail.csv")
+```
+```{r}
+glimpse(data_import)
+```
+
 
 # Visualization
 1. There are no labels on what would be the y axis of age and gender. The sizes aren't clear if their reporesentative of the whole population or along the y axis
@@ -47,7 +66,13 @@ ggplot(diamonds, aes(cut, carat)) +
 3?
 
 # Data munging and wrangling
-1.???
+1. To be tidy, each variable must have its own column, each observation have its own row, and each value have its own cell. It is not tidy because count is not its own variable in a column - see multiple types per count. We can fix this by spreading
+```{r}
+table2 %>%
+    spread(key = type, value = count)
+```
+
+
 2. 
 ```{r}
 
@@ -91,9 +116,7 @@ filter(txhousing, sales >= 8945)
 ```{r}
 ggplot(data = txhousing, aes(y = sales, x = listings)) + geom_point() + geom_smooth()
 ```
-5 What proportion of sales is missing for each city?????????????
-
-
+5 ?
 
 6. 
 ```{r}
