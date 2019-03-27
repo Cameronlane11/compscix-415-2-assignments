@@ -1,0 +1,68 @@
+---
+title: "Homework 8"
+author: "Cameron Snyder"
+date: "March 26, 2019"
+output: html_document
+---
+
+
+```{r load_packages, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(dplyr)
+library('rvest')
+library(jsonlite)
+library(leaflet)
+library(htmltools)
+```
+
+```{r}
+
+
+dublin.url <- paste0("https://api.jcdecaux.com/vls/v1/stations?contract=",'Dublin',"&apiKey=9a45f960cdf809198a4af94050e90f63601f5aee")
+dublin.api <- fromJSON(dublin.url, flatten = TRUE)
+Dublin <- dublin.api %>% 
+  mutate(longitude = position.lng, latitude = position.lat, available_bikes = as.character(available_bikes))
+
+
+berlin.url <- paste0("https://api.jcdecaux.com/vls/v1/stations?contract=",'Berlin',"&apiKey=9a45f960cdf809198a4af94050e90f63601f5aee")
+berlin.api <- fromJSON(dublin.url, flatten = TRUE)
+berlin <- berlin.api %>% 
+  mutate(longitude = position.lng, latitude = position.lat, available_bikes = as.character(available_bikes))
+
+
+seville.url <- paste0("https://api.jcdecaux.com/vls/v1/stations?contract=",'Seville',"&apiKey=9a45f960cdf809198a4af94050e90f63601f5aee")
+seville.api <- fromJSON(seville.url, flatten = TRUE)
+Seville <- seville.api %>% 
+  mutate(longitude = position.lng, latitude = position.lat, available_bikes = as.character(available_bikes))
+
+
+  
+ljub.url <- paste0("https://api.jcdecaux.com/vls/v1/stations?contract=",'Ljubljana',"&apiKey=9a45f960cdf809198a4af94050e90f63601f5aee")
+ljub.api <- fromJSON(ljub.url, flatten = TRUE)
+Ljubljana <- ljub.api %>% 
+  mutate(longitude = position.lng, latitude = position.lat, available_bikes = as.character(available_bikes))
+
+
+brisbane.url <- paste0("https://api.jcdecaux.com/vls/v1/stations?contract=",'Ljubljana',"&apiKey=9a45f960cdf809198a4af94050e90f63601f5aee")
+brisbane.api <- fromJSON(brisbane.url, flatten = TRUE)
+Brisbane <- brisbane.api %>% 
+  mutate(longitude = position.lng, latitude = position.lat, available_bikes = as.character(available_bikes))
+
+
+```
+
+```{r}
+cities <- c('Dublin', 'Brisbane', 'Seville', 'Stockholm', 'Ljubljana')
+```
+
+```{r}
+map_it <- function(city) {
+  map <- leaflet(city) %>% 
+    addTiles() %>% 
+    addMarkers(~longitude, ~latitude, label = ~available_bikes)
+  return(map)
+}
+```
+
+
